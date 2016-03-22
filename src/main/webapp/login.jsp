@@ -7,20 +7,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+	$(function(){
+		$("#loginForm").form({    
+		    url:'/user/login',    
+		    success:function(data){    
+		    	data = $.parseJSON(data);
+		    	if(data.code == 1100) {
+		    		$("#dd").dialog('close');
+		    		$.messager.alert("温馨提示",data.desc,"info",function(){
+		    			location.href="/main";
+		    		})
+		    	}else{
+		    		$("#dd").dialog('close');
+		    		$.messager.alert("温馨提示",data.desc,'error',function(){
+		    			$("#dd").dialog('open');
+		    		});
+		    	}
+		    	console.debug(data);
+		    }
+		});    
+		// submit the form    
+	})
 </script>
 </head>
 <body style="height: 100%; height: 100%">
 	<div id="bs">
 		<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
-			onclick="$('#loginForm').submit();">登录</a>
+			onclick="$('#loginForm').submit();;">登录</a>
 		<a class="easyui-linkbutton" iconCls="icon-cancel"
 			onclick="$('#loginForm').form('clear')">重置</a>
 	</div>
 	<div id="dd" class="easyui-dialog" title="用户登录"
 		style="width: 300px; height: 200px;"
 		data-options="iconCls:'icon-save',resizable:true,modal:true,buttons:'#bs'">
-		<form id="loginForm" action="/demo/menu.json" method="post">
+		<form id="loginForm" method="post">
 			<table>
 				<tr>
 					<td>用户名</td>

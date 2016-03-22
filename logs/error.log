@@ -1,0 +1,13 @@
+2016-03-22 15:34:52 [com.lt.crm.web.filter.Tes:12] - Test the MessageFormat for 1 to 2 endTo 3
+2016-03-22 16:40:14 [com.lt.crm.common.util.resp.RespBodyUtil:25] - 读取resources.properties文件出错：null
+java.lang.NullPointerException: null
+	at com.lt.crm.common.util.resp.RespBodyUtil.getRespBody(RespBodyUtil.java:25) [classes/:na]
+	at com.lt.crm.common.util.resp.RespBodyUtil.main(RespBodyUtil.java:31) [classes/:na]
+2016-03-22 16:51:09 [com.lt.crm.common.util.resp.RespBodyUtil:31] - 读取resources.properties文件出错：null
+java.lang.NullPointerException: null
+	at com.lt.crm.common.util.resp.RespBodyUtil.getRespBody(RespBodyUtil.java:31) [classes/:na]
+	at com.lt.crm.common.util.resp.RespBodyUtil.main(RespBodyUtil.java:38) [classes/:na]
+2016-03-22 16:53:09 [com.lt.crm.common.util.resp.RespBodyUtil:32] - 读取resources.properties文件出错：/ by zero
+java.lang.ArithmeticException: / by zero
+	at com.lt.crm.common.util.resp.RespBodyUtil.getRespBody(RespBodyUtil.java:32) [classes/:na]
+	at com.lt.crm.common.util.resp.RespBodyUtil.main(RespBodyUtil.java:39) [classes/:na]
