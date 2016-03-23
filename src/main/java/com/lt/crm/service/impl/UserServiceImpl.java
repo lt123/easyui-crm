@@ -19,13 +19,19 @@ public class UserServiceImpl implements IUserService{
 	
 	@Override
 	@Transactional
-	public int insertUser(User user) {
+	public Integer insertUser(User user) {
 		return userDao.addUser(user);
 	}
 
 	@Override
+	@Transactional
 	public List<User> getUser(Map<String,Object> map) {
 		return userDao.getUser(map);
+	}
+
+	@Override
+	public Integer updateUser(User user) {
+		return userDao.updateUser(user);
 	}
 	
 }

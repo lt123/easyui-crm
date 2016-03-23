@@ -2,6 +2,10 @@ package com.lt.crm.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"password"} )
 public class User {
 	private Long id;
 	private String username;
@@ -74,6 +78,8 @@ public class User {
 		this.lastLoginIp = lastLoginIp;
 		return this;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getLastLoginTime() {
 		return lastLoginTime;
 	}

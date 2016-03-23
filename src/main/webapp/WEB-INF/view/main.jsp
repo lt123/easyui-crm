@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/WEB-INF/view/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,7 +48,10 @@
 	<div data-options="region:'center'">
 		<div class="easyui-tabs" id="mainTabs" data-options='fit:true,border:false'>
 			<div title="欢迎界面">
-				欢迎使用
+				欢迎使用<br />
+				当前用户：${sessionScope.user.username}<br />
+				上次登录时间：<fmt:formatDate value="${sessionScope.user.lastLoginTime }" pattern="yyyy-MM-dd HH:mm:ss"/><br />
+				上次登录IP：${sessionScope.user.lastLoginIp}<br />
 			</div>
 		</div>
 	</div>

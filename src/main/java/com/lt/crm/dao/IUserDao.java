@@ -11,4 +11,5 @@ import com.lt.crm.model.User;
 public interface IUserDao {
 	public List<User> getUser(Map<String,Object> map);
 	public Integer addUser(User user);
+	public Integer updateUser(User user);
 }

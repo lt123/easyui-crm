@@ -7,6 +7,7 @@ import com.lt.crm.model.User;
 
 
 public interface IUserService {
-	public int insertUser(User user);
+	public Integer insertUser(User user);
 	public List<User> getUser(Map<String,Object> map);
+	public Integer updateUser(User user);
 }
