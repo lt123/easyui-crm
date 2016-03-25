@@ -27,7 +27,7 @@
 				"id":21,
 				"text":"用户管理",
 				"attributes":{
-					"url":"/user.action"
+					"url":"/user"
 				}
 			},
 			{

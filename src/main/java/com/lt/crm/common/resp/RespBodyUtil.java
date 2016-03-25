@@ -33,4 +33,8 @@ public class RespBodyUtil {
 		// 系统异常
 		return new RespBody(500, props.getProperty("500").toString(), data);
 	}
+	
+	public static RespBody getSuccess(){
+		return getRespBody(100,null);
+	}
 }

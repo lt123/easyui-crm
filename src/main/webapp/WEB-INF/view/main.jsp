@@ -13,14 +13,12 @@
 		window.onload=function(){
 			$('#menuTrue').tree({
 				onClick: function(node){
-					console.debug(node.text)
 					var title = node.text;
 					var url = node.attributes.url;
 					if(url){
 						if(!$("#mainTabs").tabs(('exists'),title)){
 							$("#mainTabs").tabs("add",{
 								title:title,
-								href:'/demo/menu.json',
 								closable:true,
 								iconCls:"icon-ok",
 								content:"<iframe src='"+url+"' frameborder='0' style='width:100%;height:100%' />"

@@ -23,6 +23,43 @@
 	<sql id="user_column_list">
 		username,password,email,age,sex,status,login_ip,login_time,last_login_ip,last_login_time,input_time
 	</sql>
+	
+	<sql id="user_query">
+		<if test="inputTime != null">
+			input_time=#{inputTime}
+		</if>
+		<if test="status != null and status != 0">
+			,status=#{status}
+		</if>
+		<if test="loginIp != null and loginIp != ''">
+			,login_ip=#{loginIp}
+		</if>
+		<if test="loginTime != null">
+			,login_time=#{loginTime}
+		</if>
+		<if test="lastLoginIp != null and lastLoginIp != ''">
+			,last_login_ip=#{lastLoginIp}
+		</if>
+		<if test="lastLoginTime != null">
+			,last_login_time=#{lastLoginTime}
+		</if>
+		<if test="username != null and username != ''">
+			,username=#{username}
+		</if>
+		<if test="password != null and password != ''">
+			,password=#{password}
+		</if>
+		<if test="email != null and email != ''">
+			,email=#{email}
+		</if>
+		<if test="age != null and age != 0">
+			,age=#{age}
+		</if>
+		<if test="sex != null and sex != 0">
+			,sex=#{sex}
+		</if> 
+	</sql>
+	
 	<select id="getUser" parameterType="map" resultMap="userMap">
 		select id,<include refid="user_column_list" />
 		from user
@@ -37,6 +74,16 @@
 				and password = #{password}
 			</if>
 		</where>
+		<if test="page >= 0 and page != null and rows != 0 and rows != null">
+			limit #{page},#{rows}
+		</if>
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="integer">
+		select count(1) from user 
+		<where>
+			<include refid="user_query" />
+		</where>
 	</select>
 	
 	<insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
@@ -47,40 +94,14 @@
 	<update id="updateUser" parameterType="User">
 		update user
 		<set>
-			<if test="inputTime != null">
-				input_time=#{inputTime}
-			</if>
-			<if test="status != null and status != 0">
-				,status=#{status}
-			</if>
-			<if test="loginIp != null and loginIp != ''">
-				,login_ip=#{loginIp}
-			</if>
-			<if test="loginTime != null">
-				,login_time=#{loginTime}
-			</if>
-			<if test="lastLoginIp != null and lastLoginIp != ''">
-				,last_login_ip=#{lastLoginIp}
-			</if>
-			<if test="lastLoginTime != null">
-				,last_login_time=#{lastLoginTime}
-			</if>
-			<if test="username != null and username != ''">
-				,username=#{username}
-			</if>
-			<if test="password != null and password != ''">
-				,password=#{password}
-			</if>
-			<if test="email != null and email != ''">
-				,email=#{email}
-			</if>
-			<if test="age != null and age != 0">
-				,age=#{age}
-			</if>
-			<if test="sex != null and sex != 0">
-				,sex=#{sex}
-			</if> 
+			<include refid="user_query" />
 		</set>
 		where id = ${id}
 	</update>
+	
+	<delete id="delete" parameterType="string">
+		updateUser user set status = -1
+		where id in ${ids}
+	</delete>
+	
 </mapper>

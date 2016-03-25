@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lt.crm.common.HttpUtil;
+import com.lt.crm.common.page.PageResp;
 import com.lt.crm.common.resp.RespBody;
 import com.lt.crm.common.resp.RespBodyUtil;
 import com.lt.crm.model.User;
@@ -52,4 +54,32 @@ public class UserController {
 		return RespBodyUtil.getRespBody(1101, null);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping("/list")
+	public PageResp<User> list(Integer page,Integer rows){
+		Map<String,Object> map = new HashMap<>();
+		map.put("page", (page - 1) * rows);
+		map.put("rows", rows);
+		System.err.println(map);
+		PageResp<User> pageResp = userService.getPageResp(map);
+		return pageResp;
+	}
+	
+
+	@ResponseBody
+	@RequestMapping("/save")
+	public RespBody save(User user,HttpServletRequest request){
+		user.setLoginIp(HttpUtil.getIpAddress(request)).setInputTime(new Date()).setLoginTime(new Date());
+		userService.addUser(user);
+		return RespBodyUtil.getSuccess();
+	}
+	
+	@ResponseBody
+	@RequestMapping("/delete")
+	public RespBody delete(String ids){
+		System.err.println(ids);
+		userService.delete(ids);
+		return RespBodyUtil.getSuccess();
+	}
 }
